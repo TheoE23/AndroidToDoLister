@@ -5,12 +5,30 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
+import com.example.todolist.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var taskViewModel: TaskViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
+        taskViewModel = ViewModelProvider(this).get(TaskViewModel::class.java)
+        binding.NewTaskButton.setOnClickListener {
+            NewToDoSheet().show(supportFragmentManager, "newToDoTag")
+        }
+
+        taskViewModel.name.observe(this){
+            binding.taskName.text = String.format("Task Name: %s", it)
+        }
+        taskViewModel.desc.observe(this){
+            binding.taskDescription.text = String.format("Task Description: %s", it)
+        }
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
