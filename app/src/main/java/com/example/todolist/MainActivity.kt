@@ -19,15 +19,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         taskViewModel = ViewModelProvider(this).get(TaskViewModel::class.java)
         binding.NewTaskButton.setOnClickListener {
-            NewToDoSheet().show(supportFragmentManager, "newToDoTag")
+            NewToDoSheet(null).show(supportFragmentManager, "newToDoTag")
         }
 
-        taskViewModel.name.observe(this){
-            binding.taskName.text = String.format("Task Name: %s", it)
-        }
-        taskViewModel.desc.observe(this){
-            binding.taskDescription.text = String.format("Task Description: %s", it)
-        }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
