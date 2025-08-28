@@ -33,8 +33,8 @@ class NewToDoSheet(var taskItem: TaskItem?) : BottomSheetDialogFragment() {
             val editable = Editable.Factory.getInstance()
             binding.name.text = editable.newEditable(taskItem!!.name)
             binding.todoDescription.text = editable.newEditable(taskItem!!.desc)
-            if(taskItem!!.dueTime != null){
-                dueTime = taskItem!!.dueTime!!
+            if(taskItem!!.dueTime() != null){
+                dueTime = taskItem!!.dueTime()!!
                 updateTimeButtonText()
             }
         }
@@ -69,15 +69,21 @@ class NewToDoSheet(var taskItem: TaskItem?) : BottomSheetDialogFragment() {
         binding.timeSelectButton.text= String.format("%02d:%02d", dueTime!!.hour, dueTime!!.minute)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun saveAction(){
         val name = binding.name.text.toString()
         val desc = binding.todoDescription.text.toString()
+        val dueTimeString = if(dueTime == null) null
+        else TaskItem.timeFormatter.format(dueTime)
         if (taskItem == null){
-            val newToDo = TaskItem(name,desc, dueTime, null)
+            val newToDo = TaskItem(name,desc, dueTimeString, null)
             taskViewModel.addTaskItem(newToDo)
         }
         else{
-            taskViewModel.updateTaskItem(taskItem!!.id, name, desc, dueTime)
+            taskItem!!.name = name
+            taskItem!!.desc = desc
+            taskItem!!.dueTimeString = dueTimeString
+            taskViewModel.updateTaskItem(taskItem!!)
         }
         binding.name.setText("")
         binding.todoDescription.setText("")
