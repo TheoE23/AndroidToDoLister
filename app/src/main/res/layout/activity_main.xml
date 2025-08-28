@@ -6,13 +6,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/topOfScreenTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Welcome to your ToDo List"
+        android:textSize="25sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:gravity="center"
+        style="@style/TextAppearance.AppCompat.Title"
+        />
     
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/todoListRecyclerView"
-        android:backgroundTint="@color/design_default_color_background">
-
+        android:backgroundTint="@color/design_default_color_background"
+        android:layout_marginTop="60dp">
     </androidx.recyclerview.widget.RecyclerView>
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:layout_width="wrap_content"
