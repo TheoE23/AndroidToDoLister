@@ -9,40 +9,51 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
         <ImageButton
+            android:id="@+id/finishedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginHorizontal="15dp"
+            android:backgroundTint="@android:color/transparent"
+            android:contentDescription="@string/checkbox"
             android:scaleX="1.5"
             android:scaleY="1.5"
-            android:contentDescription="@string/checkbox"
-            android:id="@+id/finishedButton"
-            android:layout_marginHorizontal="15dp"
-            android:src="@drawable/unchecked_24"
-            android:backgroundTint="@android:color/transparent"></ImageButton>
-        
+            android:src="@drawable/unchecked_24"></ImageButton>
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/name"
-            android:text="@string/place_holder"
             style="@style/TextAppearance.AppCompat.Title"
+            android:layout_width="152dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            ></TextView>
-        <TextView
-            android:layout_marginHorizontal="5dp"
+            android:text="@string/place_holder"></TextView>
+
+        <ImageButton
+            android:id="@+id/deleteButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/dueTime"
-            android:text="@string/place_holder"
-            style="@style/TextAppearance.AppCompat.Title"
             android:layout_gravity="center"
-            ></TextView>
+            android:layout_marginHorizontal="15dp"
+            android:backgroundTint="@android:color/transparent"
+            android:contentDescription="Delete button"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            android:src="@drawable/delete_24"></ImageButton>
+
+        <TextView
+            android:id="@+id/dueTime"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="5dp"
+            android:text="@string/place_holder"></TextView>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
